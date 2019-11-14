@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
-import history from '@history';
 
 export const GET_VEHICLES = '[VEHICLES] GET VEHICLES';
 export const SET_SEARCH_TEXT = '[VEHICLES] SET SEARCH TEXT';
@@ -14,7 +13,7 @@ export const OPEN_EDIT_VEHICLE_DIALOG = '[VEHICLES] OPEN EDIT VEHICLE DIALOG';
 export const CLOSE_EDIT_VEHICLE_DIALOG = '[VEHICLES] CLOSE EDIT VEHICLE DIALOG';
 
 export function getVehicles() {
-   const request = axios.get('/admin/getVehicles');
+   const request = axios.post('/admin/getVehicles');
 
    return (dispatch) =>
       request.then((response) => {
@@ -30,7 +29,6 @@ export function getVehicles() {
             }));
          } else if (response.data.code === 406) {
             jwtService.emit('onAutoLogout', response.data.message);
-            history.push('/login');
          } else {
             dispatch({
                type: GET_VEHICLES,
@@ -111,7 +109,6 @@ export function addVehicle(newVehicle) {
             }));
          } else if (response.data.code === 406) {
             jwtService.emit('onAutoLogout', response.data.message);
-            history.push('/login');
          } else {
             dispatch(showMessage({
                message: 'Successfully Added a New Vehicle!',
@@ -159,7 +156,6 @@ export function updateVehicle(vehicle) {
             }));
          } else if (response.data.code === 406) {
             jwtService.emit('onAutoLogout', response.data.message);
-            history.push('/login');
          } else {
             dispatch(showMessage({
                message: 'Successfully Updated a Vehicle!',
@@ -207,7 +203,6 @@ export function removeVehicle(vehicleId) {
             }));
          } else if (response.data.code === 406) {
             jwtService.emit('onAutoLogout', response.data.message);
-            history.push('/login');
          } else {
             dispatch(showMessage({
                message: 'Successfully Removed a Vehicle!',
@@ -255,7 +250,6 @@ export function removeVehicles(vehicleIds) {
             }));
          } else if (response.data.code === 406) {
             jwtService.emit('onAutoLogout', response.data.message);
-            history.push('/login');
          } else {
             dispatch(showMessage({
                message: 'Successfully Removed the Vehicles!',

@@ -244,13 +244,13 @@ function VehicleDialog(props)
                <div className="flex">
                   <FormControl variant="outlined" style={{width: '100%'}}>
                      <InputLabel>
-                        Brand
+                        Vehicle Brand *
                      </InputLabel>
                      <Select
                         name="brand"
                         value={form.brand}
                         onChange={handleChange}
-                        labelWidth={40}
+                        labelWidth={98}
                         className="mb-24"
                      >
                         {brandList.map((brand, key) => (
@@ -263,7 +263,7 @@ function VehicleDialog(props)
                <div className="flex">
                   <TextField
                      className="mb-24"
-                     label="Type"
+                     label="Vehicle Type"
                      autoFocus
                      id="type"
                      name="type"

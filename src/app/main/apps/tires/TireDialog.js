@@ -11,10 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import {makeStyles} from '@material-ui/styles';
 import {orange} from '@material-ui/core/colors';
 import {useForm} from '@fuse/hooks';
@@ -26,19 +22,12 @@ import clsx from 'clsx';
 import _ from '@lodash';
 
 const defaultFormState = {
-   brand: '',
+   type: 'tire',
    name : '',
+   min_size: '',
    image: '',
    model: ''
 };
-
-const brandList = [
-   'American Force',
-   'Factory',
-   'Hostile',
-   'Specialty Forged',
-   'TIS Forged'
-];
 
 const useStyles = makeStyles(theme => ({
    productImageFeaturedStar: {
@@ -75,51 +64,51 @@ const useStyles = makeStyles(theme => ({
    }
 }));
 
-function WheelDialog(props)
+function TireDialog(props)
 {
    const dispatch = useDispatch();
-   const wheelDialog = useSelector(({wheelsApp}) => wheelsApp.wheels.wheelDialog);
+   const tireDialog = useSelector(({tiresApp}) => tiresApp.tires.tireDialog);
    const classes = useStyles(props);
    const {form, handleChange, setForm} = useForm(defaultFormState);
 
    const initDialog = useCallback(
       () => {
-         if ( wheelDialog.type === 'edit' && wheelDialog.data )
+         if ( tireDialog.type === 'edit' && tireDialog.data )
          {
-            setForm({...wheelDialog.data});
+            setForm({...tireDialog.data});
          }
 
-         if ( wheelDialog.type === 'new' )
+         if ( tireDialog.type === 'new' )
          {
             setForm({
                ...defaultFormState,
-               ...wheelDialog.data,
+               ...tireDialog.data,
                id: FuseUtils.generateGUID()
             });
          }
       },
-      [wheelDialog.data, wheelDialog.type, setForm]
+      [tireDialog.data, tireDialog.type, setForm]
    );
 
    useEffect(() => {
       /**
       * After Dialog Open
       */
-      if ( wheelDialog.props.open ) {
+      if ( tireDialog.props.open ) {
          initDialog();
       }
 
-   }, [wheelDialog.props.open, initDialog]);
+   }, [tireDialog.props.open, initDialog]);
 
    function closeComposeDialog()
    {
-      wheelDialog.type === 'edit' ? dispatch(Actions.closeEditWheelDialog()) : dispatch(Actions.closeNewWheelDialog());
+      tireDialog.type === 'edit' ? dispatch(Actions.closeEditTireDialog()) : dispatch(Actions.closeNewTireDialog());
    }
 
    function canBeSubmitted()
    {
       return (
-         form.name.length > 0 && form.brand.length > 0 && form.image.length > 0 && form.model.length > 0
+         form.name.length > 0 && form.min_size > 0 && form.image.length > 0 && form.model.length > 0
       );
    }
 
@@ -127,10 +116,10 @@ function WheelDialog(props)
    {
       event.preventDefault();
 
-      if ( wheelDialog.type === 'new' ) {
-         dispatch(Actions.addWheel(form));
+      if ( tireDialog.type === 'new' ) {
+         dispatch(Actions.addTire(form));
       } else {
-         dispatch(Actions.updateWheel(form));
+         dispatch(Actions.updateTire(form));
       }
 
       closeComposeDialog();
@@ -138,7 +127,7 @@ function WheelDialog(props)
 
    function handleRemove()
    {
-      dispatch(Actions.removeWheel(form._id));
+      dispatch(Actions.removeTire(form._id));
       closeComposeDialog();
    }
 
@@ -204,7 +193,7 @@ function WheelDialog(props)
    return (
       <Dialog
          classes={{ paper: "m-24" }}
-         {...wheelDialog.props}
+         {...tireDialog.props}
          onClose={closeComposeDialog}
          fullWidth
          maxWidth="xs"
@@ -213,11 +202,11 @@ function WheelDialog(props)
          <AppBar position="static" elevation={1}>
             <Toolbar className="flex w-full">
                <Typography variant="subtitle1" color="inherit">
-                  {wheelDialog.type === 'new' ? 'New Wheel' : 'Edit Wheel'}
+                  {tireDialog.type === 'new' ? 'New Tire' : 'Edit Tire'}
                </Typography>
             </Toolbar>
             <div className="flex flex-col items-center justify-center pb-24">
-               {wheelDialog.type === 'edit' && (
+               {tireDialog.type === 'edit' && (
                   <>
                      <img className="h-96 rounded-4" alt="model img" src={form.image} />
                      <Typography variant="h6" color="inherit" className="pt-8">
@@ -231,25 +220,6 @@ function WheelDialog(props)
             <DialogContent classes={{root: "pl-24 pt-24 pr-24"}}>
 
                <div className="flex">
-                  <FormControl variant="outlined" style={{width: '100%'}}>
-                     <InputLabel>
-                        Wheel Brand *
-                     </InputLabel>
-                     <Select
-                        name="brand"
-                        value={form.brand}
-                        onChange={handleChange}
-                        labelWidth={95}
-                        className="mb-24"
-                     >
-                        {brandList.map((brand, key) => (
-                           <MenuItem key={key} value={brand}>{brand}</MenuItem>
-                        ))}
-                     </Select>
-                  </FormControl>
-               </div>
-
-               <div className="flex">
                   <TextField
                      className="mb-24"
                      label="Model Name"
@@ -257,6 +227,26 @@ function WheelDialog(props)
                      id="name"
                      name="name"
                      value={form.name}
+                     onChange={handleChange}
+                     variant="outlined"
+                     required
+                     fullWidth
+                  />
+               </div>
+
+               <div className="flex">
+                  <TextField
+                     className="mb-24"
+                     label="Model Minium Size (inch)"
+                     id="min_size"
+                     name="min_size"
+                     type="number"
+                     inputProps={{
+                        min: "1",
+                        max: "100"
+                     }}
+                     error={form.min_size < 0 ? true : false}
+                     value={form.min_size}
                      onChange={handleChange}
                      variant="outlined"
                      required
@@ -286,7 +276,7 @@ function WheelDialog(props)
                               <Icon fontSize="large" color="action">cloud_upload</Icon>
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
-                              <p>Wheel Image</p>                                                         
+                              <p>Tire Image</p>                                                         
                            </Grid>
                         </Grid>
                      </label>
@@ -329,7 +319,7 @@ function WheelDialog(props)
                               <Icon fontSize="large" color="action">cloud_upload</Icon>
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
-                              <p>Wheel Model</p>                                                         
+                              <p>Tire Model</p>                                                         
                            </Grid>
                         </Grid>
                      </label>
@@ -351,7 +341,7 @@ function WheelDialog(props)
                </div>
             </DialogContent>
 
-            {wheelDialog.type === 'new' ? (
+            {tireDialog.type === 'new' ? (
                <DialogActions className="justify-between pl-24 pb-24 pr-24">
                   <Button
                      variant="contained"
@@ -386,4 +376,4 @@ function WheelDialog(props)
    );
 }
 
-export default WheelDialog;
+export default TireDialog;

@@ -2,18 +2,20 @@ import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
-export const GET_WHEELS = '[WHEELS] GET WHEELS';
-export const SET_SEARCH_TEXT = '[WHEELS] SET SEARCH TEXT';
-export const TOGGLE_IN_SELECTED_WHEELS = '[WHEELS] TOGGLE IN SELECTED WHEELS';
-export const SELECT_ALL_WHEELS = '[WHEELS] SELECT ALL WHEELS';
-export const DESELECT_ALL_WHEELS = '[WHEELS] DESELECT ALL WHEELS';
-export const OPEN_NEW_WHEEL_DIALOG = '[WHEELS] OPEN NEW WHEEL DIALOG';
-export const CLOSE_NEW_WHEEL_DIALOG = '[WHEELS] CLOSE NEW WHEEL DIALOG';
-export const OPEN_EDIT_WHEEL_DIALOG = '[WHEELS] OPEN EDIT WHEEL DIALOG';
-export const CLOSE_EDIT_WHEEL_DIALOG = '[WHEELS] CLOSE EDIT WHEEL DIALOG';
+export const GET_TIRES = '[TIRES] GET TIRES';
+export const SET_SEARCH_TEXT = '[TIRES] SET SEARCH TEXT';
+export const TOGGLE_IN_SELECTED_TIRES = '[TIRES] TOGGLE IN SELECTED TIRES';
+export const SELECT_ALL_TIRES = '[TIRES] SELECT ALL TIRES';
+export const DESELECT_ALL_TIRES = '[TIRES] DESELECT ALL TIRES';
+export const OPEN_NEW_TIRE_DIALOG = '[TIRES] OPEN NEW TIRE DIALOG';
+export const CLOSE_NEW_TIRE_DIALOG = '[TIRES] CLOSE NEW TIRE DIALOG';
+export const OPEN_EDIT_TIRE_DIALOG = '[TIRES] OPEN EDIT TIRE DIALOG';
+export const CLOSE_EDIT_TIRE_DIALOG = '[TIRES] CLOSE EDIT TIRE DIALOG';
 
-export function getWheels() {
-   const request = axios.post('/admin/getWheels');
+export function getTires() {
+   const request = axios.post('/admin/getPartials', {
+      type: 'tire'
+   });
 
    return (dispatch) =>
       request.then((response) => {
@@ -31,7 +33,7 @@ export function getWheels() {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch({
-               type: GET_WHEELS,
+               type: GET_TIRES,
                payload: response.data.result
             });
          }
@@ -45,55 +47,55 @@ export function setSearchText(event) {
    };
 }
 
-export function toggleInSelectedWheels(wheelId) {
+export function toggleInSelectedTires(tireId) {
    return {
-      type: TOGGLE_IN_SELECTED_WHEELS,
-      wheelId
+      type: TOGGLE_IN_SELECTED_TIRES,
+      tireId
    };
 }
 
-export function selectAllWheels() {
+export function selectAllTires() {
    return {
-      type: SELECT_ALL_WHEELS
+      type: SELECT_ALL_TIRES
    };
 }
 
-export function deSelectAllWheels() {
+export function deSelectAllTires() {
    return {
-      type: DESELECT_ALL_WHEELS
+      type: DESELECT_ALL_TIRES
    };
 }
 
-export function openNewWheelDialog() {
+export function openNewTireDialog() {
    return {
-      type: OPEN_NEW_WHEEL_DIALOG
+      type: OPEN_NEW_TIRE_DIALOG
    };
 }
 
-export function closeNewWheelDialog() {
+export function closeNewTireDialog() {
    return {
-      type: CLOSE_NEW_WHEEL_DIALOG
+      type: CLOSE_NEW_TIRE_DIALOG
    };
 }
 
-export function openEditWheelDialog(data) {
+export function openEditTireDialog(data) {
    return {
-      type: OPEN_EDIT_WHEEL_DIALOG,
+      type: OPEN_EDIT_TIRE_DIALOG,
       data
    };
 }
 
-export function closeEditWheelDialog() {
+export function closeEditTireDialog() {
    return {
-      type: CLOSE_EDIT_WHEEL_DIALOG
+      type: CLOSE_EDIT_TIRE_DIALOG
    };
 }
 
-export function addWheel(newWheel) {
+export function addTire(newTire) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addWheel', {
-         newWheel
+      const request = axios.post('/admin/addPartial', {
+         newPartial: newTire
       });
 
       return request.then((response) => {
@@ -111,7 +113,7 @@ export function addWheel(newWheel) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Added a New Wheel!',
+               message: 'Successfully Added a New Tire!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -119,7 +121,7 @@ export function addWheel(newWheel) {
                },
                variant: 'success'
             }));
-            dispatch(getWheels());
+            dispatch(getTires());
          }
       })
       .catch(err => {
@@ -136,11 +138,11 @@ export function addWheel(newWheel) {
    };
 }
 
-export function updateWheel(wheel) {
+export function updateTire(tire) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updateWheel', {
-         wheel
+      const request = axios.post('/admin/updatePartial', {
+         partial: tire
       });
 
       return request.then((response) => {
@@ -158,7 +160,7 @@ export function updateWheel(wheel) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Updated a Wheel!',
+               message: 'Successfully Updated a Tire!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -166,7 +168,7 @@ export function updateWheel(wheel) {
                },
                variant: 'success'
             }));
-            dispatch(getWheels());
+            dispatch(getTires());
          }
       })
       .catch(err => {
@@ -183,11 +185,11 @@ export function updateWheel(wheel) {
    };
 }
 
-export function removeWheel(wheelId) {
+export function removeTire(tireId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removeWheel', {
-         wheelId
+      const request = axios.post('/admin/removePartial', {
+         partialId: tireId
       });
 
       return request.then((response) => {
@@ -205,7 +207,7 @@ export function removeWheel(wheelId) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Removed a Wheel!',
+               message: 'Successfully Removed a Tire!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -213,7 +215,7 @@ export function removeWheel(wheelId) {
                },
                variant: 'success'
             }));
-            dispatch(getWheels());
+            dispatch(getTires());
          }
       })
       .catch(err => {
@@ -230,11 +232,11 @@ export function removeWheel(wheelId) {
    };
 }
 
-export function removeWheels(wheelIds) {
+export function removeTires(tireIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removeWheels', {
-         wheelIds
+      const request = axios.post('/admin/removePartials', {
+         partialIds: tireIds
       });
 
       return request.then((response) => {
@@ -252,7 +254,7 @@ export function removeWheels(wheelIds) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Removed the Wheels!',
+               message: 'Successfully Removed the Tires!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -263,9 +265,9 @@ export function removeWheels(wheelIds) {
 
             Promise.all([
                dispatch({
-                  type: DESELECT_ALL_WHEELS
+                  type: DESELECT_ALL_TIRES
                })
-            ]).then(() => dispatch(getWheels()));
+            ]).then(() => dispatch(getTires()));
          }
       })
       .catch(err => {

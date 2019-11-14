@@ -1,9 +1,10 @@
 import history from '@history';
-import { setDefaultSettings, setInitialSettings } from 'app/store/actions/fuse';
+import { setDefaultSettings } from 'app/store/actions/fuse';
 import _ from '@lodash';
 import store from 'app/store';
 import * as Actions from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import {LoginConfig} from '../../../main/login/LoginConfig';
 
 export const SET_USER_DATA = '[USER] SET DATA';
 export const REMOVE_USER_DATA = '[USER] REMOVE DATA';
@@ -90,7 +91,7 @@ export function logoutUser() {
 
       jwtService.logout();
 
-      dispatch(setInitialSettings());
+      dispatch(setDefaultSettings(LoginConfig.settings));
    };
 }
 

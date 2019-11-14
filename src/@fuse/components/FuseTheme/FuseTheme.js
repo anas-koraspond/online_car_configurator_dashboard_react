@@ -26,7 +26,7 @@ function FuseTheme(props)
          [key]: createMuiTheme(_.merge({}, muiTheme, {
             mixins: extendThemeWithMixins(muiTheme)
          }))
-      }
+      };
    }));
 
    return (

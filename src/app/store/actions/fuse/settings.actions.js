@@ -23,9 +23,8 @@ export function setInitialSettings() {
    };
 }
 
-export function resetSettings(value) {
+export function resetSettings() {
    return {
-      type: RESET_DEFAULT_SETTINGS,
-      value
+      type: RESET_DEFAULT_SETTINGS
    };
 }

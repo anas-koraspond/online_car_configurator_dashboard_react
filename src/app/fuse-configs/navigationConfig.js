@@ -81,11 +81,11 @@ const navigationConfig = [{
       'url': '/hoods'
    },
    {
-      'id': 'bedcover',
-      'title': 'Bed Cover',
+      'id': 'bedcovers',
+      'title': 'Bed Covers',
       'type': 'item',
       'icon': 'adjust',
-      'url': '/bedcover'
+      'url': '/bedcovers'
    },
    {
       'id': 'bedaccessories',

@@ -6,6 +6,7 @@ import {ShocksAppConfig} from './shocks/ShocksAppConfig';
 import {FendersAppConfig} from './fenders/FendersAppConfig';
 import {GrillesAppConfig} from './grilles/GrillesAppConfig';
 import {HeadlightsAppConfig} from './headlights/HeadlightsAppConfig';
+import {HoodsAppConfig} from './hoods/HoodsAppConfig';
 
 export const appsConfigs = [
    VehiclesAppConfig,
@@ -15,5 +16,6 @@ export const appsConfigs = [
    ShocksAppConfig,
    FendersAppConfig,
    GrillesAppConfig,
-   HeadlightsAppConfig
+   HeadlightsAppConfig,
+   HoodsAppConfig
 ];

@@ -74,11 +74,11 @@ const navigationConfig = [{
       'url': '/headlights'
    },
    {
-      'id': 'hood',
-      'title': 'Hood',
+      'id': 'hoods',
+      'title': 'Hoods',
       'type': 'item',
       'icon': 'adjust',
-      'url': '/hood'
+      'url': '/hoods'
    },
    {
       'id': 'bedcover',

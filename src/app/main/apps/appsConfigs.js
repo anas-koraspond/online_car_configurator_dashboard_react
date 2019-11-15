@@ -4,6 +4,7 @@ import {TiresAppConfig} from './tires/TiresAppConfig';
 import {SuspensionsAppConfig} from './suspensions/SuspensionsAppConfig';
 import {ShocksAppConfig} from './shocks/ShocksAppConfig';
 import {FrontBumpersAppConfig} from './frontbumpers/FrontBumpersAppConfig';
+import {RearBumpersAppConfig} from './rearbumpers/RearBumpersAppConfig';
 import {FendersAppConfig} from './fenders/FendersAppConfig';
 import {GrillesAppConfig} from './grilles/GrillesAppConfig';
 import {HeadlightsAppConfig} from './headlights/HeadlightsAppConfig';
@@ -20,6 +21,7 @@ export const appsConfigs = [
    SuspensionsAppConfig,
    ShocksAppConfig,
    FrontBumpersAppConfig,
+   RearBumpersAppConfig,
    FendersAppConfig,
    GrillesAppConfig,
    HeadlightsAppConfig,

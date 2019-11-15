@@ -46,11 +46,11 @@ const navigationConfig = [{
       'url': '/frontbumpers'
    },
    {
-      'id': 'rearbumper',
-      'title': 'Rear Bumper',
+      'id': 'rearbumpers',
+      'title': 'Rear Bumpers',
       'type': 'item',
       'icon': 'adjust',
-      'url': '/rearbumper'
+      'url': '/rearbumpers'
    },
    {
       'id': 'fenders',

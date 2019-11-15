@@ -2,19 +2,19 @@ import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
-export const GET_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] GET ADDITIONALLIGHTS';
-export const SET_SEARCH_TEXT = '[ADDITIONALLIGHTS] SET SEARCH TEXT';
-export const TOGGLE_IN_SELECTED_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] TOGGLE IN SELECTED ADDITIONALLIGHTS';
-export const SELECT_ALL_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] SELECT ALL ADDITIONALLIGHTS';
-export const DESELECT_ALL_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] DESELECT ALL ADDITIONALLIGHTS';
-export const OPEN_NEW_ADDITIONALLIGHT_DIALOG = '[ADDITIONALLIGHTS] OPEN NEW ADDITIONALLIGHT DIALOG';
-export const CLOSE_NEW_ADDITIONALLIGHT_DIALOG = '[ADDITIONALLIGHTS] CLOSE NEW ADDITIONALLIGHT DIALOG';
-export const OPEN_EDIT_ADDITIONALLIGHT_DIALOG = '[ADDITIONALLIGHTS] OPEN EDIT ADDITIONALLIGHT DIALOG';
-export const CLOSE_EDIT_ADDITIONALLIGHT_DIALOG = '[ADDITIONALLIGHTS] CLOSE EDIT ADDITIONALLIGHT DIALOG';
+export const GET_FRONTBUMPERS = '[FRONTBUMPERS] GET FRONTBUMPERS';
+export const SET_SEARCH_TEXT = '[FRONTBUMPERS] SET SEARCH TEXT';
+export const TOGGLE_IN_SELECTED_FRONTBUMPERS = '[FRONTBUMPERS] TOGGLE IN SELECTED FRONTBUMPERS';
+export const SELECT_ALL_FRONTBUMPERS = '[FRONTBUMPERS] SELECT ALL FRONTBUMPERS';
+export const DESELECT_ALL_FRONTBUMPERS = '[FRONTBUMPERS] DESELECT ALL FRONTBUMPERS';
+export const OPEN_NEW_FRONTBUMPER_DIALOG = '[FRONTBUMPERS] OPEN NEW FRONTBUMPER DIALOG';
+export const CLOSE_NEW_FRONTBUMPER_DIALOG = '[FRONTBUMPERS] CLOSE NEW FRONTBUMPER DIALOG';
+export const OPEN_EDIT_FRONTBUMPER_DIALOG = '[FRONTBUMPERS] OPEN EDIT FRONTBUMPER DIALOG';
+export const CLOSE_EDIT_FRONTBUMPER_DIALOG = '[FRONTBUMPERS] CLOSE EDIT FRONTBUMPER DIALOG';
 
-export function getAdditionalLights() {
+export function getFrontBumpers() {
    const request = axios.post('/admin/getPartials', {
-      type: 'additionallight'
+      type: 'frontbumper'
    });
 
    return (dispatch) =>
@@ -33,7 +33,7 @@ export function getAdditionalLights() {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch({
-               type: GET_ADDITIONALLIGHTS,
+               type: GET_FRONTBUMPERS,
                payload: response.data.result
             });
          }
@@ -47,55 +47,55 @@ export function setSearchText(event) {
    };
 }
 
-export function toggleInSelectedAdditionalLights(additionallightId) {
+export function toggleInSelectedFrontBumpers(frontbumperId) {
    return {
-      type: TOGGLE_IN_SELECTED_ADDITIONALLIGHTS,
-      additionallightId
+      type: TOGGLE_IN_SELECTED_FRONTBUMPERS,
+      frontbumperId
    };
 }
 
-export function selectAllAdditionalLights() {
+export function selectAllFrontBumpers() {
    return {
-      type: SELECT_ALL_ADDITIONALLIGHTS
+      type: SELECT_ALL_FRONTBUMPERS
    };
 }
 
-export function deSelectAllAdditionalLights() {
+export function deSelectAllFrontBumpers() {
    return {
-      type: DESELECT_ALL_ADDITIONALLIGHTS
+      type: DESELECT_ALL_FRONTBUMPERS
    };
 }
 
-export function openNewAdditionalLightDialog() {
+export function openNewFrontBumperDialog() {
    return {
-      type: OPEN_NEW_ADDITIONALLIGHT_DIALOG
+      type: OPEN_NEW_FRONTBUMPER_DIALOG
    };
 }
 
-export function closeNewAdditionalLightDialog() {
+export function closeNewFrontBumperDialog() {
    return {
-      type: CLOSE_NEW_ADDITIONALLIGHT_DIALOG
+      type: CLOSE_NEW_FRONTBUMPER_DIALOG
    };
 }
 
-export function openEditAdditionalLightDialog(data) {
+export function openEditFrontBumperDialog(data) {
    return {
-      type: OPEN_EDIT_ADDITIONALLIGHT_DIALOG,
+      type: OPEN_EDIT_FRONTBUMPER_DIALOG,
       data
    };
 }
 
-export function closeEditAdditionalLightDialog() {
+export function closeEditFrontBumperDialog() {
    return {
-      type: CLOSE_EDIT_ADDITIONALLIGHT_DIALOG
+      type: CLOSE_EDIT_FRONTBUMPER_DIALOG
    };
 }
 
-export function addAdditionalLight(newAdditionalLight) {
+export function addFrontBumper(newFrontBumper) {
    return (dispatch) => {
 
       const request = axios.post('/admin/addPartial', {
-         newPartial: newAdditionalLight
+         newPartial: newFrontBumper
       });
 
       return request.then((response) => {
@@ -113,7 +113,7 @@ export function addAdditionalLight(newAdditionalLight) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Added a New Additional Light!',
+               message: 'Successfully Added a New Front Bumper!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -121,7 +121,7 @@ export function addAdditionalLight(newAdditionalLight) {
                },
                variant: 'success'
             }));
-            dispatch(getAdditionalLights());
+            dispatch(getFrontBumpers());
          }
       })
       .catch(err => {
@@ -138,11 +138,11 @@ export function addAdditionalLight(newAdditionalLight) {
    };
 }
 
-export function updateAdditionalLight(additionallight) {
+export function updateFrontBumper(frontbumper) {
    return (dispatch) => {
 
       const request = axios.post('/admin/updatePartial', {
-         partial: additionallight
+         partial: frontbumper
       });
 
       return request.then((response) => {
@@ -160,7 +160,7 @@ export function updateAdditionalLight(additionallight) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Updated a Additional Light!',
+               message: 'Successfully Updated a Front Bumper!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -168,7 +168,7 @@ export function updateAdditionalLight(additionallight) {
                },
                variant: 'success'
             }));
-            dispatch(getAdditionalLights());
+            dispatch(getFrontBumpers());
          }
       })
       .catch(err => {
@@ -185,11 +185,11 @@ export function updateAdditionalLight(additionallight) {
    };
 }
 
-export function removeAdditionalLight(additionallightId) {
+export function removeFrontBumper(frontbumperId) {
    return (dispatch) => {
 
       const request = axios.post('/admin/removePartial', {
-         partialId: additionallightId
+         partialId: frontbumperId
       });
 
       return request.then((response) => {
@@ -207,7 +207,7 @@ export function removeAdditionalLight(additionallightId) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Removed a Additional Light!',
+               message: 'Successfully Removed a Front Bumper!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -215,7 +215,7 @@ export function removeAdditionalLight(additionallightId) {
                },
                variant: 'success'
             }));
-            dispatch(getAdditionalLights());
+            dispatch(getFrontBumpers());
          }
       })
       .catch(err => {
@@ -232,11 +232,11 @@ export function removeAdditionalLight(additionallightId) {
    };
 }
 
-export function removeAdditionalLights(additionallightIds) {
+export function removeFrontBumpers(frontbumperIds) {
    return (dispatch) => {
 
       const request = axios.post('/admin/removePartials', {
-         partialIds: additionallightIds
+         partialIds: frontbumperIds
       });
 
       return request.then((response) => {
@@ -254,7 +254,7 @@ export function removeAdditionalLights(additionallightIds) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Removed the Additional Lights!',
+               message: 'Successfully Removed the Front Bumpers!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -265,9 +265,9 @@ export function removeAdditionalLights(additionallightIds) {
 
             Promise.all([
                dispatch({
-                  type: DESELECT_ALL_ADDITIONALLIGHTS
+                  type: DESELECT_ALL_FRONTBUMPERS
                })
-            ]).then(() => dispatch(getAdditionalLights()));
+            ]).then(() => dispatch(getFrontBumpers()));
          }
       })
       .catch(err => {

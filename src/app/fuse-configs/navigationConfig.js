@@ -39,11 +39,11 @@ const navigationConfig = [{
       'url': '/shocks'
    },
    {
-      'id': 'frontbumper',
-      'title': 'Front Bumper',
+      'id': 'frontbumpers',
+      'title': 'Front Bumpers',
       'type': 'item',
       'icon': 'adjust',
-      'url': '/frontbumper'
+      'url': '/frontbumpers'
    },
    {
       'id': 'rearbumper',

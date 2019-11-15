@@ -14,98 +14,98 @@ const navigationConfig = [{
       'id': 'wheels',
       'title': 'Wheels',
       'type': 'item',
-      'icon': 'album',
+      'icon': 'camera',
       'url': '/wheels'
    },
    {
       'id': 'tires',
       'title': 'Tires',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'album',
       'url': '/tires'
    },
    {
       'id': 'suspensions',
       'title': 'Suspensions',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'all_inbox',
       'url': '/suspensions'
    },
    {
       'id': 'shocks',
       'title': 'Shocks',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'confirmation_number',
       'url': '/shocks'
    },
    {
       'id': 'frontbumpers',
       'title': 'Front Bumpers',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'credit_card',
       'url': '/frontbumpers'
    },
    {
       'id': 'rearbumpers',
       'title': 'Rear Bumpers',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'call_to_action',
       'url': '/rearbumpers'
    },
    {
       'id': 'fenders',
       'title': 'Fenders',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'cast_connected',
       'url': '/fenders'
    },
    {
       'id': 'grilles',
       'title': 'Grilles',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'account_balance',
       'url': '/grilles'
    },
    {
       'id': 'headlights',
       'title': 'Headlights',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'highlight',
       'url': '/headlights'
    },
    {
       'id': 'hoods',
       'title': 'Hoods',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'table_chart',
       'url': '/hoods'
    },
    {
       'id': 'bedcovers',
       'title': 'Bed Covers',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'calendar_today',
       'url': '/bedcovers'
    },
    {
       'id': 'bedaccessories',
       'title': 'Bed Accessories',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'event_note',
       'url': '/bedaccessories'
    },
    {
       'id': 'additionallights',
       'title': 'Additional Lights',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'blur_circular',
       'url': '/additionallights'
    },
    {
       'id': 'hitchs',
       'title': 'Hitchs',
       'type': 'item',
-      'icon': 'adjust',
+      'icon': 'event_seat',
       'url': '/hitchs'
    }]
 }];

@@ -19,7 +19,7 @@ function SuspensionsHeader(props)
 
             <div className="flex items-center">
                <FuseAnimate animation="transition.expandIn" delay={300}>
-                  <Icon className="text-32 mr-12">adjust</Icon>
+                  <Icon className="text-32 mr-12">all_inbox</Icon>
                </FuseAnimate>
                <FuseAnimate animation="transition.slideLeftIn" delay={300}>
                   <Typography variant="h6" className="hidden sm:flex">Suspensions</Typography>

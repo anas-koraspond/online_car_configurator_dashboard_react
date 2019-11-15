@@ -2,19 +2,19 @@ import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
-export const GET_BEDACCESSORIES = '[BEDACCESSORIES] GET BEDACCESSORIES';
-export const SET_SEARCH_TEXT = '[BEDACCESSORIES] SET SEARCH TEXT';
-export const TOGGLE_IN_SELECTED_BEDACCESSORIES = '[BEDACCESSORIES] TOGGLE IN SELECTED BEDACCESSORIES';
-export const SELECT_ALL_BEDACCESSORIES = '[BEDACCESSORIES] SELECT ALL BEDACCESSORIES';
-export const DESELECT_ALL_BEDACCESSORIES = '[BEDACCESSORIES] DESELECT ALL BEDACCESSORIES';
-export const OPEN_NEW_BEDACCESSORY_DIALOG = '[BEDACCESSORIES] OPEN NEW BEDACCESSORY DIALOG';
-export const CLOSE_NEW_BEDACCESSORY_DIALOG = '[BEDACCESSORIES] CLOSE NEW BEDACCESSORY DIALOG';
-export const OPEN_EDIT_BEDACCESSORY_DIALOG = '[BEDACCESSORIES] OPEN EDIT BEDACCESSORY DIALOG';
-export const CLOSE_EDIT_BEDACCESSORY_DIALOG = '[BEDACCESSORIES] CLOSE EDIT BEDACCESSORY DIALOG';
+export const GET_BEDCOVERS = '[BEDCOVERS] GET BEDCOVERS';
+export const SET_SEARCH_TEXT = '[BEDCOVERS] SET SEARCH TEXT';
+export const TOGGLE_IN_SELECTED_BEDCOVERS = '[BEDCOVERS] TOGGLE IN SELECTED BEDCOVERS';
+export const SELECT_ALL_BEDCOVERS = '[BEDCOVERS] SELECT ALL BEDCOVERS';
+export const DESELECT_ALL_BEDCOVERS = '[BEDCOVERS] DESELECT ALL BEDCOVERS';
+export const OPEN_NEW_BEDCOVER_DIALOG = '[BEDCOVERS] OPEN NEW BEDCOVER DIALOG';
+export const CLOSE_NEW_BEDCOVER_DIALOG = '[BEDCOVERS] CLOSE NEW BEDCOVER DIALOG';
+export const OPEN_EDIT_BEDCOVER_DIALOG = '[BEDCOVERS] OPEN EDIT BEDCOVER DIALOG';
+export const CLOSE_EDIT_BEDCOVER_DIALOG = '[BEDCOVERS] CLOSE EDIT BEDCOVER DIALOG';
 
-export function getBedAccessories() {
+export function getAdditionalLights() {
    const request = axios.post('/admin/getPartials', {
-      type: 'bedaccessory'
+      type: 'additionallight'
    });
 
    return (dispatch) =>
@@ -33,7 +33,7 @@ export function getBedAccessories() {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch({
-               type: GET_BEDACCESSORIES,
+               type: GET_BEDCOVERS,
                payload: response.data.result
             });
          }
@@ -47,55 +47,55 @@ export function setSearchText(event) {
    };
 }
 
-export function toggleInSelectedBedAccessories(bedaccessoryId) {
+export function toggleInSelectedAdditionalLights(additionallightId) {
    return {
-      type: TOGGLE_IN_SELECTED_BEDACCESSORIES,
-      bedaccessoryId
+      type: TOGGLE_IN_SELECTED_BEDCOVERS,
+      additionallightId
    };
 }
 
-export function selectAllBedAccessories() {
+export function selectAllAdditionalLights() {
    return {
-      type: SELECT_ALL_BEDACCESSORIES
+      type: SELECT_ALL_BEDCOVERS
    };
 }
 
-export function deSelectAllBedAccessories() {
+export function deSelectAllAdditionalLights() {
    return {
-      type: DESELECT_ALL_BEDACCESSORIES
+      type: DESELECT_ALL_BEDCOVERS
    };
 }
 
-export function openNewBedAccessoryDialog() {
+export function openNewAdditionalLightDialog() {
    return {
-      type: OPEN_NEW_BEDACCESSORY_DIALOG
+      type: OPEN_NEW_BEDCOVER_DIALOG
    };
 }
 
-export function closeNewBedAccessoryDialog() {
+export function closeNewAdditionalLightDialog() {
    return {
-      type: CLOSE_NEW_BEDACCESSORY_DIALOG
+      type: CLOSE_NEW_BEDCOVER_DIALOG
    };
 }
 
-export function openEditBedAccessoryDialog(data) {
+export function openEditAdditionalLightDialog(data) {
    return {
-      type: OPEN_EDIT_BEDACCESSORY_DIALOG,
+      type: OPEN_EDIT_BEDCOVER_DIALOG,
       data
    };
 }
 
-export function closeEditBedAccessoryDialog() {
+export function closeEditAdditionalLightDialog() {
    return {
-      type: CLOSE_EDIT_BEDACCESSORY_DIALOG
+      type: CLOSE_EDIT_BEDCOVER_DIALOG
    };
 }
 
-export function addBedAccessory(newBedAccessory) {
+export function addAdditionalLight(newAdditionalLight) {
    return (dispatch) => {
 
       const request = axios.post('/admin/addPartial', {
-         newPartial: newBedAccessory
+         newPartial: newAdditionalLight
       });
 
       return request.then((response) => {
@@ -113,7 +113,7 @@ export function addBedAccessory(newBedAccessory) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Added a New Bed Accessory!',
+               message: 'Successfully Added a New Additional Light!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -121,7 +121,7 @@ export function addBedAccessory(newBedAccessory) {
                },
                variant: 'success'
             }));
-            dispatch(getBedAccessories());
+            dispatch(getAdditionalLights());
          }
       })
       .catch(err => {
@@ -138,11 +138,11 @@ export function addBedAccessory(newBedAccessory) {
    };
 }
 
-export function updateBedAccessory(bedaccessory) {
+export function updateAdditionalLight(additionallight) {
    return (dispatch) => {
 
       const request = axios.post('/admin/updatePartial', {
-         partial: bedaccessory
+         partial: additionallight
       });
 
       return request.then((response) => {
@@ -160,7 +160,7 @@ export function updateBedAccessory(bedaccessory) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Updated a Bed Accessory!',
+               message: 'Successfully Updated a Additional Light!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -168,7 +168,7 @@ export function updateBedAccessory(bedaccessory) {
                },
                variant: 'success'
             }));
-            dispatch(getBedAccessories());
+            dispatch(getAdditionalLights());
          }
       })
       .catch(err => {
@@ -185,11 +185,11 @@ export function updateBedAccessory(bedaccessory) {
    };
 }
 
-export function removeBedAccessory(bedaccessoryId) {
+export function removeAdditionalLight(additionallightId) {
    return (dispatch) => {
 
       const request = axios.post('/admin/removePartial', {
-         partialId: bedaccessoryId
+         partialId: additionallightId
       });
 
       return request.then((response) => {
@@ -207,7 +207,7 @@ export function removeBedAccessory(bedaccessoryId) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Removed a Bed Accessory!',
+               message: 'Successfully Removed a Additional Light!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -215,7 +215,7 @@ export function removeBedAccessory(bedaccessoryId) {
                },
                variant: 'success'
             }));
-            dispatch(getBedAccessories());
+            dispatch(getAdditionalLights());
          }
       })
       .catch(err => {
@@ -232,11 +232,11 @@ export function removeBedAccessory(bedaccessoryId) {
    };
 }
 
-export function removeBedAccessories(bedaccessoryIds) {
+export function removeAdditionalLights(additionallightIds) {
    return (dispatch) => {
 
       const request = axios.post('/admin/removePartials', {
-         partialIds: bedaccessoryIds
+         partialIds: additionallightIds
       });
 
       return request.then((response) => {
@@ -254,7 +254,7 @@ export function removeBedAccessories(bedaccessoryIds) {
             jwtService.emit('onAutoLogout', response.data.message);
          } else {
             dispatch(showMessage({
-               message: 'Successfully Removed the Bed Accessories!',
+               message: 'Successfully Removed the Additional Lights!',
                autoHideDuration: 2000,
                anchorOrigin: {
                   vertical: 'top',
@@ -265,9 +265,9 @@ export function removeBedAccessories(bedaccessoryIds) {
 
             Promise.all([
                dispatch({
-                  type: DESELECT_ALL_BEDACCESSORIES
+                  type: DESELECT_ALL_BEDCOVERS
                })
-            ]).then(() => dispatch(getBedAccessories()));
+            ]).then(() => dispatch(getAdditionalLights()));
          }
       })
       .catch(err => {

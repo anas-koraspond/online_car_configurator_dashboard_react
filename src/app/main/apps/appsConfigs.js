@@ -9,6 +9,7 @@ import {HeadlightsAppConfig} from './headlights/HeadlightsAppConfig';
 import {HoodsAppConfig} from './hoods/HoodsAppConfig';
 import {BedCoversAppConfig} from './bedcovers/BedCoversAppConfig';
 import {BedAccessoriesAppConfig} from './bedaccessories/BedAccessoriesAppConfig';
+import {AdditionalLightsAppConfig} from './additionallights/AdditionalLightsAppConfig';
 import {HitchsAppConfig} from './hitchs/HitchsAppConfig';
 
 export const appsConfigs = [
@@ -23,5 +24,6 @@ export const appsConfigs = [
    HoodsAppConfig,
    BedCoversAppConfig,
    BedAccessoriesAppConfig,
+   AdditionalLightsAppConfig,
    HitchsAppConfig
 ];

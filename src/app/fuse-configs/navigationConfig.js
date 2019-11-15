@@ -25,87 +25,87 @@ const navigationConfig = [{
       'url': '/tires'
    },
    {
-      'id': 'suspension',
-      'title': 'Suspension',
+      'id': 'suspensions',
+      'title': 'Suspensions',
       'type': 'item',
-      'icon': 'account_box',
-      'url': '/suspension'
+      'icon': 'adjust',
+      'url': '/suspensions'
    },
    {
       'id': 'shocks',
       'title': 'Shocks',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/shocks'
    },
    {
       'id': 'frontbumper',
       'title': 'Front Bumper',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/frontbumper'
    },
    {
       'id': 'rearbumper',
       'title': 'Rear Bumper',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/rearbumper'
    },
    {
       'id': 'fenders',
       'title': 'Fenders',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/fenders'
    },
    {
       'id': 'grille',
       'title': 'Grille',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/grille'
    },
    {
       'id': 'headlights',
       'title': 'Headlights',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/headlights'
    },
    {
       'id': 'hood',
       'title': 'Hood',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/hood'
    },
    {
       'id': 'bedcover',
       'title': 'Bed Cover',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/bedcover'
    },
    {
       'id': 'bedaccessories',
       'title': 'Bed Accessories',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/bedaccessories'
    },
    {
       'id': 'additionallights',
       'title': 'Additional Lights',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/additionallights'
    },
    {
       'id': 'hitch',
       'title': 'Hitch',
       'type': 'item',
-      'icon': 'account_box',
+      'icon': 'adjust',
       'url': '/hitch'
    }]
 }];

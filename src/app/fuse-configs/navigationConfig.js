@@ -60,11 +60,11 @@ const navigationConfig = [{
       'url': '/fenders'
    },
    {
-      'id': 'grille',
-      'title': 'Grille',
+      'id': 'grilles',
+      'title': 'Grilles',
       'type': 'item',
       'icon': 'adjust',
-      'url': '/grille'
+      'url': '/grilles'
    },
    {
       'id': 'headlights',

@@ -1,9 +1,10 @@
 import {VehiclesAppConfig} from './vehicles/VehiclesAppConfig';
 import {WheelsAppConfig} from './wheels/WheelsAppConfig';
 import {TiresAppConfig} from './tires/TiresAppConfig';
-import {SuspensionsAppConfig} from './suspension/SuspensionsAppConfig';
+import {SuspensionsAppConfig} from './suspensions/SuspensionsAppConfig';
 import {ShocksAppConfig} from './shocks/ShocksAppConfig';
 import {FendersAppConfig} from './fenders/FendersAppConfig';
+import {GrillesAppConfig} from './grilles/GrillesAppConfig';
 
 export const appsConfigs = [
    VehiclesAppConfig,
@@ -11,5 +12,6 @@ export const appsConfigs = [
    TiresAppConfig,
    SuspensionsAppConfig,
    ShocksAppConfig,
-   FendersAppConfig
+   FendersAppConfig,
+   GrillesAppConfig
 ];

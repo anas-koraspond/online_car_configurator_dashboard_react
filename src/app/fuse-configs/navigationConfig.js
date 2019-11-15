@@ -102,11 +102,11 @@ const navigationConfig = [{
       'url': '/additionallights'
    },
    {
-      'id': 'hitch',
-      'title': 'Hitch',
+      'id': 'hitchs',
+      'title': 'Hitchs',
       'type': 'item',
       'icon': 'adjust',
-      'url': '/hitch'
+      'url': '/hitchs'
    }]
 }];
 

@@ -22,7 +22,7 @@ import clsx from 'clsx';
 import _ from '@lodash';
 
 const defaultFormState = {
-   type: 'bedcover',
+   type: 'bedaccessory',
    name : '',
    image: '',
    model: ''
@@ -63,45 +63,45 @@ const useStyles = makeStyles(theme => ({
    }
 }));
 
-function BedCoverDialog(props)
+function BedAccessoryDialog(props)
 {
    const dispatch = useDispatch();
-   const bedcoverDialog = useSelector(({bedcoversApp}) => bedcoversApp.bedcovers.bedcoverDialog);
+   const bedaccessoryDialog = useSelector(({bedaccessoriesApp}) => bedaccessoriesApp.bedaccessories.bedaccessoryDialog);
    const classes = useStyles(props);
    const {form, handleChange, setForm} = useForm(defaultFormState);
 
    const initDialog = useCallback(
       () => {
-         if ( bedcoverDialog.type === 'edit' && bedcoverDialog.data )
+         if ( bedaccessoryDialog.type === 'edit' && bedaccessoryDialog.data )
          {
-            setForm({...bedcoverDialog.data});
+            setForm({...bedaccessoryDialog.data});
          }
 
-         if ( bedcoverDialog.type === 'new' )
+         if ( bedaccessoryDialog.type === 'new' )
          {
             setForm({
                ...defaultFormState,
-               ...bedcoverDialog.data,
+               ...bedaccessoryDialog.data,
                id: FuseUtils.generateGUID()
             });
          }
       },
-      [bedcoverDialog.data, bedcoverDialog.type, setForm]
+      [bedaccessoryDialog.data, bedaccessoryDialog.type, setForm]
    );
 
    useEffect(() => {
       /**
       * After Dialog Open
       */
-      if ( bedcoverDialog.props.open ) {
+      if ( bedaccessoryDialog.props.open ) {
          initDialog();
       }
 
-   }, [bedcoverDialog.props.open, initDialog]);
+   }, [bedaccessoryDialog.props.open, initDialog]);
 
    function closeComposeDialog()
    {
-      bedcoverDialog.type === 'edit' ? dispatch(Actions.closeEditBedCoverDialog()) : dispatch(Actions.closeNewBedCoverDialog());
+      bedaccessoryDialog.type === 'edit' ? dispatch(Actions.closeEditBedAccessoryDialog()) : dispatch(Actions.closeNewBedAccessoryDialog());
    }
 
    function canBeSubmitted()
@@ -115,10 +115,10 @@ function BedCoverDialog(props)
    {
       event.preventDefault();
 
-      if ( bedcoverDialog.type === 'new' ) {
-         dispatch(Actions.addBedCover(form));
+      if ( bedaccessoryDialog.type === 'new' ) {
+         dispatch(Actions.addBedAccessory(form));
       } else {
-         dispatch(Actions.updateBedCover(form));
+         dispatch(Actions.updateBedAccessory(form));
       }
 
       closeComposeDialog();
@@ -126,7 +126,7 @@ function BedCoverDialog(props)
 
    function handleRemove()
    {
-      dispatch(Actions.removeBedCover(form._id));
+      dispatch(Actions.removeBedAccessory(form._id));
       closeComposeDialog();
    }
 
@@ -192,7 +192,7 @@ function BedCoverDialog(props)
    return (
       <Dialog
          classes={{ paper: "m-24" }}
-         {...bedcoverDialog.props}
+         {...bedaccessoryDialog.props}
          onClose={closeComposeDialog}
          fullWidth
          maxWidth="xs"
@@ -201,11 +201,11 @@ function BedCoverDialog(props)
          <AppBar position="static" elevation={1}>
             <Toolbar className="flex w-full">
                <Typography variant="subtitle1" color="inherit">
-                  {bedcoverDialog.type === 'new' ? 'New Bed Cover' : 'Edit Bed Cover'}
+                  {bedaccessoryDialog.type === 'new' ? 'New Bed Accessory' : 'Edit Bed Accessory'}
                </Typography>
             </Toolbar>
             <div className="flex flex-col items-center justify-center pb-24">
-               {bedcoverDialog.type === 'edit' && (
+               {bedaccessoryDialog.type === 'edit' && (
                   <>
                      <img className="h-96 rounded-4" alt="model img" src={form.image} />
                      <Typography variant="h6" color="inherit" className="pt-8">
@@ -255,7 +255,7 @@ function BedCoverDialog(props)
                               <Icon fontSize="large" color="action">cloud_upload</Icon>
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
-                              <p>Bed Cover Image</p>                                                         
+                              <p>Bed Accessory Image</p>                                                         
                            </Grid>
                         </Grid>
                      </label>
@@ -298,7 +298,7 @@ function BedCoverDialog(props)
                               <Icon fontSize="large" color="action">cloud_upload</Icon>
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
-                              <p>Bed Cover Model</p>                                                         
+                              <p>Bed Accessory Model</p>                                                         
                            </Grid>
                         </Grid>
                      </label>
@@ -320,7 +320,7 @@ function BedCoverDialog(props)
                </div>
             </DialogContent>
 
-            {bedcoverDialog.type === 'new' ? (
+            {bedaccessoryDialog.type === 'new' ? (
                <DialogActions className="justify-between pl-24 pb-24 pr-24">
                   <Button
                      variant="contained"
@@ -355,4 +355,4 @@ function BedCoverDialog(props)
    );
 }
 
-export default BedCoverDialog;
+export default BedAccessoryDialog;

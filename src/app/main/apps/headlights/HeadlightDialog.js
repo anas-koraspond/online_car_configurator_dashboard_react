@@ -254,7 +254,7 @@ function HeadlightDialog(props)
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
                               <Icon fontSize="large" color="action">cloud_upload</Icon>
                            </Grid>
-                           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
+                           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
                               <p>Headlight Image</p>                                                         
                            </Grid>
                         </Grid>
@@ -297,7 +297,7 @@ function HeadlightDialog(props)
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
                               <Icon fontSize="large" color="action">cloud_upload</Icon>
                            </Grid>
-                           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
+                           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
                               <p>Headlight Model</p>                                                         
                            </Grid>
                         </Grid>

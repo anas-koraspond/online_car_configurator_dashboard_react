@@ -8,6 +8,7 @@ import {GrillesAppConfig} from './grilles/GrillesAppConfig';
 import {HeadlightsAppConfig} from './headlights/HeadlightsAppConfig';
 import {HoodsAppConfig} from './hoods/HoodsAppConfig';
 import {BedCoversAppConfig} from './bedcovers/BedCoversAppConfig';
+import {BedAccessoriesAppConfig} from './bedaccessories/BedAccessoriesAppConfig';
 import {HitchsAppConfig} from './hitchs/HitchsAppConfig';
 
 export const appsConfigs = [
@@ -21,5 +22,6 @@ export const appsConfigs = [
    HeadlightsAppConfig,
    HoodsAppConfig,
    BedCoversAppConfig,
+   BedAccessoriesAppConfig,
    HitchsAppConfig
 ];

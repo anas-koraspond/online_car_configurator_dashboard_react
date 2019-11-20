@@ -18,6 +18,10 @@ function TiresApp(props)
       dispatch(Actions.getTires());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

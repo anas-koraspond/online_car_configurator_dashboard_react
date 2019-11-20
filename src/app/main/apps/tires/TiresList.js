@@ -117,6 +117,12 @@ function TiresList(props)
                   className : "font-bold"
                },
                {
+                  Header    : "Vehicle Type",
+                  accessor  : "vehicle_type",
+                  filterable: true,
+                  className : "font-bold"
+               },
+               {
                   Header    : "Model Minium Size",
                   accessor  : "min_size",
                   filterable: true,

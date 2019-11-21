@@ -18,6 +18,10 @@ function HoodsApp(props)
       dispatch(Actions.getHoods());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

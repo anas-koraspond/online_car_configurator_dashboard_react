@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_GRILLES = '[GRILLES] GET GRILLES';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[GRILLES] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_GRILLES = '[GRILLES] TOGGLE IN SELECTED GRILLES';
 export const SELECT_ALL_GRILLES = '[GRILLES] SELECT ALL GRILLES';
@@ -34,6 +35,20 @@ export function getGrilles() {
          } else {
             dispatch({
                type: GET_GRILLES,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

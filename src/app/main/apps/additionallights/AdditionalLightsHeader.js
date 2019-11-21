@@ -5,12 +5,14 @@ import {FuseAnimate} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
 import {Fab} from '@material-ui/core';
 import * as Actions from './store/actions';
+import {showMessage} from 'app/store/actions';
 
 function AdditionalLightsHeader(props)
 {
    const dispatch = useDispatch();
    const searchText = useSelector(({additionallightsApp}) => additionallightsApp.additionallights.searchText);
    const mainTheme = useSelector(({fuse}) => fuse.settings.mainTheme);
+   const vehicleTypes = useSelector(({additionallightsApp}) => additionallightsApp.additionallights.vehicleTypes);
 
    return (
       <div className="flex flex-1 items-center justify-between p-8 sm:p-24">
@@ -54,7 +56,21 @@ function AdditionalLightsHeader(props)
             <Fab
                color="secondary"
                aria-label="add"
-               onClick={ev => dispatch(Actions.openNewAdditionalLightDialog())}
+               onClick={ev => {
+                  if (vehicleTypes.length === 0) {
+                     dispatch(showMessage({
+                        message: 'There are not registered any vehicles yet. Please register the vehicle first...',
+                        autoHideDuration: 3000,
+                        anchorOrigin: {
+                           vertical: 'top',
+                           horizontal: 'right'
+                        },
+                        variant: 'warning'
+                     }))
+                  } else {
+                     dispatch(Actions.openNewAdditionalLightDialog());
+                  }
+               }}
             >
                <Icon>add</Icon>
             </Fab>

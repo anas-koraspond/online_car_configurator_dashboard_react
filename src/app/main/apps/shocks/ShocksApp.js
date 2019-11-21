@@ -18,6 +18,10 @@ function ShocksApp(props)
       dispatch(Actions.getShocks());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

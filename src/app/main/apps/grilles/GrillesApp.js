@@ -18,6 +18,10 @@ function GrillesApp(props)
       dispatch(Actions.getGrilles());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

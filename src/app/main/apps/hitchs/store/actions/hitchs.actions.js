@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_HITCHS = '[HITCHS] GET HITCHS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[HITCHS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_HITCHS = '[HITCHS] TOGGLE IN SELECTED HITCHS';
 export const SELECT_ALL_HITCHS = '[HITCHS] SELECT ALL HITCHS';
@@ -34,6 +35,20 @@ export function getHitchs() {
          } else {
             dispatch({
                type: GET_HITCHS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

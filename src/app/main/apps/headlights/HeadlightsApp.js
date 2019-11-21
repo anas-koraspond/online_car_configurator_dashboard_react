@@ -18,6 +18,10 @@ function HeadlightsApp(props)
       dispatch(Actions.getHeadlights());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

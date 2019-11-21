@@ -18,6 +18,10 @@ function RearBumpersApp(props)
       dispatch(Actions.getRearBumpers());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] GET ADDITIONALLIGHTS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[ADDITIONALLIGHTS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] TOGGLE IN SELECTED ADDITIONALLIGHTS';
 export const SELECT_ALL_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] SELECT ALL ADDITIONALLIGHTS';
@@ -34,6 +35,20 @@ export function getAdditionalLights() {
          } else {
             dispatch({
                type: GET_ADDITIONALLIGHTS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

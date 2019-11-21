@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_FRONTBUMPERS = '[FRONTBUMPERS] GET FRONTBUMPERS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[FRONTBUMPERS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_FRONTBUMPERS = '[FRONTBUMPERS] TOGGLE IN SELECTED FRONTBUMPERS';
 export const SELECT_ALL_FRONTBUMPERS = '[FRONTBUMPERS] SELECT ALL FRONTBUMPERS';
@@ -34,6 +35,20 @@ export function getFrontBumpers() {
          } else {
             dispatch({
                type: GET_FRONTBUMPERS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

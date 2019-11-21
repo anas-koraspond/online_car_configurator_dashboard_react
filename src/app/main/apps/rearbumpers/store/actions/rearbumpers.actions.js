@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_REARBUMPERS = '[REARBUMPERS] GET REARBUMPERS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[REARBUMPERS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_REARBUMPERS = '[REARBUMPERS] TOGGLE IN SELECTED REARBUMPERS';
 export const SELECT_ALL_REARBUMPERS = '[REARBUMPERS] SELECT ALL REARBUMPERS';
@@ -34,6 +35,20 @@ export function getRearBumpers() {
          } else {
             dispatch({
                type: GET_REARBUMPERS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

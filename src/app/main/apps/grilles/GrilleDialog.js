@@ -11,6 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import {makeStyles} from '@material-ui/styles';
 import {orange} from '@material-ui/core/colors';
 import {useForm} from '@fuse/hooks';
@@ -23,6 +27,7 @@ import _ from '@lodash';
 
 const defaultFormState = {
    type: 'grille',
+   vehicle_type: '',
    name : '',
    image: '',
    model: ''
@@ -67,6 +72,7 @@ function GrilleDialog(props)
 {
    const dispatch = useDispatch();
    const grilleDialog = useSelector(({grillesApp}) => grillesApp.grilles.grilleDialog);
+   const vehicleTypes = useSelector(({grillesApp}) => grillesApp.grilles.vehicleTypes);
    const classes = useStyles(props);
    const {form, handleChange, setForm} = useForm(defaultFormState);
 
@@ -107,7 +113,7 @@ function GrilleDialog(props)
    function canBeSubmitted()
    {
       return (
-         form.name.length > 0 && form.image.length > 0 && form.model.length > 0
+         form.name.length > 0 && form.image.length > 0 && form.model.length > 0 && form.vehicle_type.length > 0
       );
    }
 
@@ -231,6 +237,25 @@ function GrilleDialog(props)
                      required
                      fullWidth
                   />
+               </div>
+
+               <div className="flex">
+                  <FormControl variant="outlined" style={{width: '100%'}}>
+                     <InputLabel>
+                        Vehicle Type *
+                     </InputLabel>
+                     <Select
+                        name="vehicle_type"
+                        value={form.vehicle_type}
+                        onChange={handleChange}
+                        labelWidth={90}
+                        className="mb-24"
+                     >
+                        {vehicleTypes.map((vehicleType, key) => (
+                           <MenuItem key={key} value={vehicleType}>{vehicleType}</MenuItem>
+                        ))}
+                     </Select>
+                  </FormControl>
                </div>
 
                <div className="flex justify-center">

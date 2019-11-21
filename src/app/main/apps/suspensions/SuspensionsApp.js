@@ -18,6 +18,10 @@ function SuspensionsApp(props)
       dispatch(Actions.getSuspensions());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_SUSPENSIONS = '[SUSPENSIONS] GET SUSPENSIONS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[SUSPENSIONS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_SUSPENSIONS = '[SUSPENSIONS] TOGGLE IN SELECTED SUSPENSIONS';
 export const SELECT_ALL_SUSPENSIONS = '[SUSPENSIONS] SELECT ALL SUSPENSIONS';
@@ -34,6 +35,20 @@ export function getSuspensions() {
          } else {
             dispatch({
                type: GET_SUSPENSIONS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

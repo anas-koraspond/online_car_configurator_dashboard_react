@@ -18,6 +18,10 @@ function BedCoversApp(props)
       dispatch(Actions.getBedCovers());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

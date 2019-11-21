@@ -18,6 +18,10 @@ function FendersApp(props)
       dispatch(Actions.getFenders());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

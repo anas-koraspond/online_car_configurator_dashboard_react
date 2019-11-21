@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_HOODS = '[HOODS] GET HOODS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[HOODS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_HOODS = '[HOODS] TOGGLE IN SELECTED HOODS';
 export const SELECT_ALL_HOODS = '[HOODS] SELECT ALL HOODS';
@@ -34,6 +35,20 @@ export function getHoods() {
          } else {
             dispatch({
                type: GET_HOODS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

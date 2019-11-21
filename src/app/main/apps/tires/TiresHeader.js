@@ -60,7 +60,7 @@ function TiresHeader(props)
                   if (vehicleTypes.length === 0) {
                      dispatch(showMessage({
                         message: 'There are not registered any vehicles yet. Please register the vehicle first...',
-                        autoHideDuration: 2000,
+                        autoHideDuration: 3000,
                         anchorOrigin: {
                            vertical: 'top',
                            horizontal: 'right'

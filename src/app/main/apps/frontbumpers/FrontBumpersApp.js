@@ -18,6 +18,10 @@ function FrontBumpersApp(props)
       dispatch(Actions.getFrontBumpers());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

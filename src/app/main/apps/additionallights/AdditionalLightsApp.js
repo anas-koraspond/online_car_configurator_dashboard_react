@@ -18,6 +18,10 @@ function AdditionalLightsApp(props)
       dispatch(Actions.getAdditionalLights());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

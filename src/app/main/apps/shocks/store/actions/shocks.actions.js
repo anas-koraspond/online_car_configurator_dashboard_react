@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_SHOCKS = '[SHOCKS] GET SHOCKS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[SHOCKS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_SHOCKS = '[SHOCKS] TOGGLE IN SELECTED SHOCKS';
 export const SELECT_ALL_SHOCKS = '[SHOCKS] SELECT ALL SHOCKS';
@@ -34,6 +35,20 @@ export function getShocks() {
          } else {
             dispatch({
                type: GET_SHOCKS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

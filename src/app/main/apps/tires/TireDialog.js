@@ -249,7 +249,7 @@ function TireDialog(props)
                         name="vehicle_type"
                         value={form.vehicle_type}
                         onChange={handleChange}
-                        labelWidth={95}
+                        labelWidth={90}
                         className="mb-24"
                      >
                         {vehicleTypes.map((vehicleType, key) => (

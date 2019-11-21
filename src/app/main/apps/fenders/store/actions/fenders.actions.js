@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_FENDERS = '[FENDERS] GET FENDERS';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[FENDERS] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_FENDERS = '[FENDERS] TOGGLE IN SELECTED FENDERS';
 export const SELECT_ALL_FENDERS = '[FENDERS] SELECT ALL FENDERS';
@@ -34,6 +35,20 @@ export function getFenders() {
          } else {
             dispatch({
                type: GET_FENDERS,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

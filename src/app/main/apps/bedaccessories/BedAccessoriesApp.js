@@ -18,6 +18,10 @@ function BedAccessoriesApp(props)
       dispatch(Actions.getBedAccessories());
    }, [dispatch]);
 
+   useEffect(() => {
+      dispatch(Actions.getVehicleTypes());
+   }, [dispatch]);
+
    return (
       <React.Fragment>
          <FusePageSimple

@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
 
 export const GET_BEDACCESSORIES = '[BEDACCESSORIES] GET BEDACCESSORIES';
+export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
 export const SET_SEARCH_TEXT = '[BEDACCESSORIES] SET SEARCH TEXT';
 export const TOGGLE_IN_SELECTED_BEDACCESSORIES = '[BEDACCESSORIES] TOGGLE IN SELECTED BEDACCESSORIES';
 export const SELECT_ALL_BEDACCESSORIES = '[BEDACCESSORIES] SELECT ALL BEDACCESSORIES';
@@ -34,6 +35,20 @@ export function getBedAccessories() {
          } else {
             dispatch({
                type: GET_BEDACCESSORIES,
+               payload: response.data.result
+            });
+         }
+      });
+}
+
+export function getVehicleTypes() {
+   const request = axios.post('/admin/getVehicleTypes');
+
+   return (dispatch) => 
+      request.then((response) => {
+         if (response.data.success) {
+            dispatch({
+               type: GET_VEHICLE_TYPES,
                payload: response.data.result
             });
          }

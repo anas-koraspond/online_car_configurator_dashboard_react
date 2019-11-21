@@ -117,6 +117,12 @@ function BedCoversList(props)
                   className : "font-bold"
                },
                {
+                  Header    : "Vehicle Type",
+                  accessor  : "vehicle_type",
+                  filterable: true,
+                  className : "font-bold"
+               },
+               {
                   Header    : "Model File Name",
                   accessor  : "model",
                   Cell     : row => (

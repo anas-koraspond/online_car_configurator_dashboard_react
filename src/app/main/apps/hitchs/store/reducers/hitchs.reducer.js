@@ -11,7 +11,8 @@ const initialState = {
          open: false
       },
       data: null
-   }
+   },
+   vehicleTypes: []
 };
 
 const hitchsReducer = function (state = initialState, action) {
@@ -20,6 +21,12 @@ const hitchsReducer = function (state = initialState, action) {
          return {
             ...state,
             entities: _.keyBy(action.payload, '_id')
+         };
+      }
+      case Actions.GET_VEHICLE_TYPES: {
+         return {
+            ...state,
+            vehicleTypes: action.payload
          };
       }
       case Actions.SET_SEARCH_TEXT: {

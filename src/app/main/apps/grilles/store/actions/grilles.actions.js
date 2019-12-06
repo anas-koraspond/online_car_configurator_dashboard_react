@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_GRILLES = '[GRILLES] GET GRILLES';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_GRILLE_DIALOG = '[GRILLES] OPEN EDIT GRILLE DIALOG';
 export const CLOSE_EDIT_GRILLE_DIALOG = '[GRILLES] CLOSE EDIT GRILLE DIALOG';
 
 export function getGrilles() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'grille'
    });
 
@@ -42,7 +43,7 @@ export function getGrilles() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditGrilleDialog() {
 export function addGrille(newGrille) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newGrille
       });
 
@@ -156,7 +157,7 @@ export function addGrille(newGrille) {
 export function updateGrille(grille) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: grille
       });
 
@@ -203,7 +204,7 @@ export function updateGrille(grille) {
 export function removeGrille(grilleId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: grilleId
       });
 
@@ -250,7 +251,7 @@ export function removeGrille(grilleId) {
 export function removeGrilles(grilleIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: grilleIds
       });
 

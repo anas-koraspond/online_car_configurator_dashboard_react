@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_SHOCKS = '[SHOCKS] GET SHOCKS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_SHOCK_DIALOG = '[SHOCKS] OPEN EDIT SHOCK DIALOG';
 export const CLOSE_EDIT_SHOCK_DIALOG = '[SHOCKS] CLOSE EDIT SHOCK DIALOG';
 
 export function getShocks() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'shock'
    });
 
@@ -42,7 +43,7 @@ export function getShocks() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditShockDialog() {
 export function addShock(newShock) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newShock
       });
 
@@ -156,7 +157,7 @@ export function addShock(newShock) {
 export function updateShock(shock) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: shock
       });
 
@@ -203,7 +204,7 @@ export function updateShock(shock) {
 export function removeShock(shockId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: shockId
       });
 
@@ -250,7 +251,7 @@ export function removeShock(shockId) {
 export function removeShocks(shockIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: shockIds
       });
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, useState} from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {makeStyles} from '@material-ui/styles';
 import {orange} from '@material-ui/core/colors';
 import {useForm} from '@fuse/hooks';
@@ -24,6 +25,7 @@ import {showMessage} from 'app/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import clsx from 'clsx';
 import _ from '@lodash';
+import settingConfig from '../../../fuse-configs/settingsConfig';
 
 const defaultFormState = {
    type: 'tire',
@@ -76,6 +78,8 @@ function TireDialog(props)
    const vehicleTypes = useSelector(({tiresApp}) => tiresApp.tires.vehicleTypes);
    const classes = useStyles(props);
    const {form, handleChange, setForm} = useForm(defaultFormState);
+   const [imageUploading, setImageUploading] = useState(false);
+   const [modelUploading, setModelUploading] = useState(false);
 
    const initDialog = useCallback(
       () => {
@@ -152,9 +156,11 @@ function TireDialog(props)
 
       var url = '';
       if (type === 'image') {
-         url = '/admin/uploadImage';
+         url = `${settingConfig.apiServerURL}/admin/uploadImage`;
+         setImageUploading(true);
       } else {
-         url = '/admin/uploadModel';
+         url = `${settingConfig.apiServerURL}/admin/uploadModel`;
+         setModelUploading(true);
       }
 
       axios.post(url, formData)
@@ -182,6 +188,12 @@ function TireDialog(props)
 
             setForm(_.set({...form}, type, response.data.result));
          }
+
+         if (type === 'image') {
+            setImageUploading(false);
+         } else {
+            setModelUploading(false);
+         }
       })
       .catch(err => {
          dispatch(showMessage({
@@ -193,6 +205,12 @@ function TireDialog(props)
             },
             variant: 'error'
          }));
+
+         if (type === 'image') {
+            setImageUploading(false);
+         } else {
+            setModelUploading(false);
+         }
       });
    }
 
@@ -200,7 +218,12 @@ function TireDialog(props)
       <Dialog
          classes={{ paper: "m-24" }}
          {...tireDialog.props}
-         onClose={closeComposeDialog}
+         onClose={() => {
+            if (imageUploading || modelUploading) {
+               return;
+            }
+            closeComposeDialog()
+         }}
          fullWidth
          maxWidth="xs"
       >
@@ -214,7 +237,7 @@ function TireDialog(props)
             <div className="flex flex-col items-center justify-center pb-24">
                {tireDialog.type === 'edit' && (
                   <>
-                     <img className="h-96 rounded-4" alt="model img" src={form.image} />
+                     <img className="h-96 rounded-4" alt="model img" src={`${settingConfig.apiServerURL}${form.image}`} />
                      <Typography variant="h6" color="inherit" className="pt-8">
                         {form.name}
                      </Typography>
@@ -298,7 +321,8 @@ function TireDialog(props)
                      >
                         <Grid container>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
-                              <Icon fontSize="large" color="action">cloud_upload</Icon>
+                              {!imageUploading && <Icon fontSize="large" color="action">cloud_upload</Icon>}
+                              {imageUploading && <CircularProgress size={24} />}
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
                               <p>Tire Image</p>                                                         
@@ -315,7 +339,7 @@ function TireDialog(props)
                                  )
                               }
                            >
-                              <img className="max-w-none w-auto h-full" src={form.image} alt="product"/>
+                              <img className="max-w-none w-auto h-full" src={`${settingConfig.apiServerURL}${form.image}`} alt="product"/>
                            </div>
                         </FuseAnimate>
                      }
@@ -341,7 +365,8 @@ function TireDialog(props)
                      >
                         <Grid container>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
-                              <Icon fontSize="large" color="action">cloud_upload</Icon>
+                              {!modelUploading && <Icon fontSize="large" color="action">cloud_upload</Icon>}
+                              {modelUploading && <CircularProgress size={24} />}
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
                               <p>Tire Model</p>                                                         

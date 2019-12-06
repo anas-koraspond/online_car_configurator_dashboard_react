@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_HEADLIGHTS = '[HEADLIGHTS] GET HEADLIGHTS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_HEADLIGHT_DIALOG = '[HEADLIGHTS] OPEN EDIT HEADLIGHT DIAL
 export const CLOSE_EDIT_HEADLIGHT_DIALOG = '[HEADLIGHTS] CLOSE EDIT HEADLIGHT DIALOG';
 
 export function getHeadlights() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'headlight'
    });
 
@@ -42,7 +43,7 @@ export function getHeadlights() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditHeadlightDialog() {
 export function addHeadlight(newHeadlight) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newHeadlight
       });
 
@@ -156,7 +157,7 @@ export function addHeadlight(newHeadlight) {
 export function updateHeadlight(headlight) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: headlight
       });
 
@@ -203,7 +204,7 @@ export function updateHeadlight(headlight) {
 export function removeHeadlight(headlightId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: headlightId
       });
 
@@ -250,7 +251,7 @@ export function removeHeadlight(headlightId) {
 export function removeHeadlights(headlightIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: headlightIds
       });
 

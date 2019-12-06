@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_VEHICLES = '[VEHICLES] GET VEHICLES';
 export const SET_SEARCH_TEXT = '[VEHICLES] SET SEARCH TEXT';
@@ -13,7 +14,7 @@ export const OPEN_EDIT_VEHICLE_DIALOG = '[VEHICLES] OPEN EDIT VEHICLE DIALOG';
 export const CLOSE_EDIT_VEHICLE_DIALOG = '[VEHICLES] CLOSE EDIT VEHICLE DIALOG';
 
 export function getVehicles() {
-   const request = axios.post('/admin/getVehicles');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicles`);
 
    return (dispatch) =>
       request.then((response) => {
@@ -92,7 +93,7 @@ export function closeEditVehicleDialog() {
 export function addVehicle(newVehicle) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addVehicle', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addVehicle`, {
          newVehicle
       });
 
@@ -139,7 +140,7 @@ export function addVehicle(newVehicle) {
 export function updateVehicle(vehicle) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updateVehicle', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updateVehicle`, {
          vehicle
       });
 
@@ -186,7 +187,7 @@ export function updateVehicle(vehicle) {
 export function removeVehicle(vehicleId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removeVehicle', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removeVehicle`, {
          vehicleId
       });
 
@@ -233,7 +234,7 @@ export function removeVehicle(vehicleId) {
 export function removeVehicles(vehicleIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removeVehicles', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removeVehicles`, {
          vehicleIds
       });
 

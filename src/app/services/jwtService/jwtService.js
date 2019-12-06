@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import FuseUtils from '@fuse/FuseUtils';
+import settingConfig from '../../fuse-configs/settingsConfig';
 
 class jwtService extends FuseUtils.EventEmitter {
 
@@ -28,7 +29,7 @@ class jwtService extends FuseUtils.EventEmitter {
 
    signInWithEmailAndPassword = (username, password) => {
       return new Promise((resolve, reject) => {
-         axios.post('/admin/signin', { 
+         axios.post(`${settingConfig.apiServerURL}/admin/signin`, { 
             username,
             password
          }).then(response => {
@@ -48,7 +49,7 @@ class jwtService extends FuseUtils.EventEmitter {
 
    signInWithToken = () => {
       return new Promise((resolve, reject) => {
-         axios.post('/admin/autoSignInWithToken', {
+         axios.post(`${settingConfig.apiServerURL}/admin/autoSignInWithToken`, {
             access_token: this.getAccessToken()
          })
          .then(response => {

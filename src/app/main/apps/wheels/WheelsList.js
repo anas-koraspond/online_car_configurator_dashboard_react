@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import ReactTable from "react-table";
 import * as Actions from './store/actions';
 import WheelsMultiSelectMenu from './WheelsMultiSelectMenu';
+import settingConfig from '../../../fuse-configs/settingsConfig';
 
 function WheelsList(props)
 {
@@ -104,7 +105,7 @@ function WheelsList(props)
                   ),
                   accessor : "image",
                   Cell     : row => (
-                     <img src={row.value} alt={row.original.name} className='rounded-4'></img>
+                     <img src={`${settingConfig.apiServerURL}${row.value}`} alt={row.original.name} className='rounded-4'></img>
                   ),
                   className: "justify-center",
                   width    : 61,

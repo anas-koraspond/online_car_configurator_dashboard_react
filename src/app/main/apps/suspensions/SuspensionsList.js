@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import ReactTable from "react-table";
 import * as Actions from './store/actions';
 import SuspensionsMultiSelectMenu from './SuspensionsMultiSelectMenu';
+import settingConfig from '../../../fuse-configs/settingsConfig';
 
 function SuspensionsList(props)
 {
@@ -104,7 +105,7 @@ function SuspensionsList(props)
                   ),
                   accessor : "image",
                   Cell     : row => (
-                     <img src={row.value} alt={row.original.name} className='rounded-4'></img>
+                     <img src={`${settingConfig.apiServerURL}${row.value}`} alt={row.original.name} className='rounded-4'></img>
                   ),
                   className: "justify-center",
                   width    : 61,
@@ -120,6 +121,22 @@ function SuspensionsList(props)
                   Header    : "Vehicle Type",
                   accessor  : "vehicle_type",
                   filterable: true,
+                  className : "font-bold"
+               },
+               {
+                  Header    : "Size",
+                  accessor  : "size_arr",
+                  Cell      : row => {
+                     return(
+                        <p>{row.value.map((value, index, arr) => {
+                           if (index === arr.length-1) {
+                              return(`${value}`)
+                           } else {
+                              return(`${value}, `)
+                           }                           
+                        })}</p>
+                     )
+                  },
                   className : "font-bold"
                },
                {

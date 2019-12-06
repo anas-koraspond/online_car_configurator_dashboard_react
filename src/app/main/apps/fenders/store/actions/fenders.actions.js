@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_FENDERS = '[FENDERS] GET FENDERS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_FENDER_DIALOG = '[FENDERS] OPEN EDIT FENDER DIALOG';
 export const CLOSE_EDIT_FENDER_DIALOG = '[FENDERS] CLOSE EDIT FENDER DIALOG';
 
 export function getFenders() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'fender'
    });
 
@@ -42,7 +43,7 @@ export function getFenders() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditFenderDialog() {
 export function addFender(newFender) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newFender
       });
 
@@ -156,7 +157,7 @@ export function addFender(newFender) {
 export function updateFender(fender) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: fender
       });
 
@@ -203,7 +204,7 @@ export function updateFender(fender) {
 export function removeFender(fenderId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: fenderId
       });
 
@@ -250,7 +251,7 @@ export function removeFender(fenderId) {
 export function removeFenders(fenderIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: fenderIds
       });
 

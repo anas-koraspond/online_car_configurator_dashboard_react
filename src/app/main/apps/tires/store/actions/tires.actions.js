@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_TIRES = '[TIRES] GET TIRES';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_TIRE_DIALOG = '[TIRES] OPEN EDIT TIRE DIALOG';
 export const CLOSE_EDIT_TIRE_DIALOG = '[TIRES] CLOSE EDIT TIRE DIALOG';
 
 export function getTires() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'tire'
    });
 
@@ -42,7 +43,7 @@ export function getTires() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditTireDialog() {
 export function addTire(newTire) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newTire
       });
 
@@ -156,7 +157,7 @@ export function addTire(newTire) {
 export function updateTire(tire) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: tire
       });
 
@@ -203,7 +204,7 @@ export function updateTire(tire) {
 export function removeTire(tireId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: tireId
       });
 
@@ -250,7 +251,7 @@ export function removeTire(tireId) {
 export function removeTires(tireIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: tireIds
       });
 

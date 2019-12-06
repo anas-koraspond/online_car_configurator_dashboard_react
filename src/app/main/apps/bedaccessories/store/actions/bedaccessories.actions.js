@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_BEDACCESSORIES = '[BEDACCESSORIES] GET BEDACCESSORIES';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_BEDACCESSORY_DIALOG = '[BEDACCESSORIES] OPEN EDIT BEDACCE
 export const CLOSE_EDIT_BEDACCESSORY_DIALOG = '[BEDACCESSORIES] CLOSE EDIT BEDACCESSORY DIALOG';
 
 export function getBedAccessories() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'bedaccessory'
    });
 
@@ -42,7 +43,7 @@ export function getBedAccessories() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditBedAccessoryDialog() {
 export function addBedAccessory(newBedAccessory) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newBedAccessory
       });
 
@@ -156,7 +157,7 @@ export function addBedAccessory(newBedAccessory) {
 export function updateBedAccessory(bedaccessory) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: bedaccessory
       });
 
@@ -203,7 +204,7 @@ export function updateBedAccessory(bedaccessory) {
 export function removeBedAccessory(bedaccessoryId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: bedaccessoryId
       });
 
@@ -250,7 +251,7 @@ export function removeBedAccessory(bedaccessoryId) {
 export function removeBedAccessories(bedaccessoryIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: bedaccessoryIds
       });
 

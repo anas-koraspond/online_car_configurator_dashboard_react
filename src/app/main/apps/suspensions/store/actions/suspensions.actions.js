@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_SUSPENSIONS = '[SUSPENSIONS] GET SUSPENSIONS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_SUSPENSION_DIALOG = '[SUSPENSIONS] OPEN EDIT SUSPENSION D
 export const CLOSE_EDIT_SUSPENSION_DIALOG = '[SUSPENSIONS] CLOSE EDIT SUSPENSION DIALOG';
 
 export function getSuspensions() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'suspension'
    });
 
@@ -42,7 +43,7 @@ export function getSuspensions() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditSuspensionDialog() {
 export function addSuspension(newSuspension) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newSuspension
       });
 
@@ -156,7 +157,7 @@ export function addSuspension(newSuspension) {
 export function updateSuspension(suspension) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: suspension
       });
 
@@ -203,7 +204,7 @@ export function updateSuspension(suspension) {
 export function removeSuspension(suspensionId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: suspensionId
       });
 
@@ -250,7 +251,7 @@ export function removeSuspension(suspensionId) {
 export function removeSuspensions(suspensionIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: suspensionIds
       });
 

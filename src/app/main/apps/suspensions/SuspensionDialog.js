@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, useState} from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -12,9 +12,14 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {makeStyles} from '@material-ui/styles';
 import {orange} from '@material-ui/core/colors';
 import {useForm} from '@fuse/hooks';
@@ -24,14 +29,18 @@ import {showMessage} from 'app/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import clsx from 'clsx';
 import _ from '@lodash';
+import settingConfig from '../../../fuse-configs/settingsConfig';
 
 const defaultFormState = {
    type: 'suspension',
    vehicle_type: '',
    name : '',
+   size_arr: [],
    image: '',
    model: ''
 };
+
+const sizeArrange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const useStyles = makeStyles(theme => ({
    productImageFeaturedStar: {
@@ -75,6 +84,8 @@ function SuspensionDialog(props)
    const vehicleTypes = useSelector(({suspensionsApp}) => suspensionsApp.suspensions.vehicleTypes);
    const classes = useStyles(props);
    const {form, handleChange, setForm} = useForm(defaultFormState);
+   const [imageUploading, setImageUploading] = useState(false);
+   const [modelUploading, setModelUploading] = useState(false);
 
    const initDialog = useCallback(
       () => {
@@ -151,9 +162,11 @@ function SuspensionDialog(props)
 
       var url = '';
       if (type === 'image') {
-         url = '/admin/uploadImage';
+         url = `${settingConfig.apiServerURL}/admin/uploadImage`;
+         setImageUploading(true);
       } else {
-         url = '/admin/uploadModel';
+         url = `${settingConfig.apiServerURL}/admin/uploadModel`;
+         setModelUploading(true);
       }
 
       axios.post(url, formData)
@@ -181,6 +194,12 @@ function SuspensionDialog(props)
 
             setForm(_.set({...form}, type, response.data.result));
          }
+
+         if (type === 'image') {
+            setImageUploading(false);
+         } else {
+            setModelUploading(false);
+         }
       })
       .catch(err => {
          dispatch(showMessage({
@@ -192,14 +211,39 @@ function SuspensionDialog(props)
             },
             variant: 'error'
          }));
+
+         if (type === 'image') {
+            setImageUploading(false);
+         } else {
+            setModelUploading(false);
+         }
       });
+   }
+
+   function changeSize(e) {
+      var value = parseInt(e.target.value);
+
+      if (form.size_arr.includes(value)) {
+         setForm({ ...form, size_arr: form.size_arr.filter(size => size !== value) });
+      } else {
+         var temp = form.size_arr;
+         
+         temp.push(value);        
+         temp.sort(function(a, b){return a - b});
+         setForm({ ...form, size_arr: temp });
+      }
    }
 
    return (
       <Dialog
          classes={{ paper: "m-24" }}
          {...suspensionDialog.props}
-         onClose={closeComposeDialog}
+         onClose={() => {
+            if (imageUploading || modelUploading) {
+               return;
+            }
+            closeComposeDialog()
+         }}
          fullWidth
          maxWidth="xs"
       >
@@ -213,7 +257,7 @@ function SuspensionDialog(props)
             <div className="flex flex-col items-center justify-center pb-24">
                {suspensionDialog.type === 'edit' && (
                   <>
-                     <img className="h-96 rounded-4" alt="model img" src={form.image} />
+                     <img className="h-96 rounded-4" alt="model img" src={`${settingConfig.apiServerURL}${form.image}`} />
                      <Typography variant="h6" color="inherit" className="pt-8">
                         {form.name}
                      </Typography>
@@ -258,6 +302,23 @@ function SuspensionDialog(props)
                   </FormControl>
                </div>
 
+               <div className="flex">
+                  <FormControl component="fieldset" className={classes.formControl}>
+                     <FormLabel component="legend" className="ml-5">Size</FormLabel>
+                     <FormGroup row={true} className="ml-44 mb-5">
+                        {
+                           sizeArrange.map((size, index) => (
+                              <FormControlLabel
+                                 key={index}
+                                 control={<Checkbox checked={form.size_arr.includes(size) ? true : false} onChange={changeSize} value={size} />}
+                                 label={`${size}"`}
+                              />                              
+                           ))
+                        }
+                     </FormGroup>
+                  </FormControl>
+               </div>
+
                <div className="flex justify-center">
                   <input
                      accept="image/*"
@@ -277,7 +338,8 @@ function SuspensionDialog(props)
                      >
                         <Grid container>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
-                              <Icon fontSize="large" color="action">cloud_upload</Icon>
+                              {!imageUploading && <Icon fontSize="large" color="action">cloud_upload</Icon>}
+                              {imageUploading && <CircularProgress size={24} />}
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
                               <p>Suspension Image</p>                                                         
@@ -294,7 +356,7 @@ function SuspensionDialog(props)
                                  )
                               }
                            >
-                              <img className="max-w-none w-auto h-full" src={form.image} alt="product"/>
+                              <img className="max-w-none w-auto h-full" src={`${settingConfig.apiServerURL}${form.image}`} alt="product"/>
                            </div>
                         </FuseAnimate>
                      }
@@ -308,6 +370,7 @@ function SuspensionDialog(props)
                      id="model-file"
                      type="file"
                      onChange={(e) => handleUploadChange(e, 'model')}
+                     onClick={(e) => { if (modelUploading) e.preventDefault() }}
                   />
                   <div className="flex justify-center sm:justify-start flex-wrap">
                      <label
@@ -320,10 +383,11 @@ function SuspensionDialog(props)
                      >
                         <Grid container>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center">
-                              <Icon fontSize="large" color="action">cloud_upload</Icon>
+                              {!modelUploading && <Icon fontSize="large" color="action">cloud_upload</Icon>}
+                              {modelUploading && <CircularProgress size={24} />}
                            </Grid>
                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className="flex justify-center text-center">
-                              <p>Suspension Model</p>                                                         
+                              <p>Suspension Model</p>
                            </Grid>
                         </Grid>
                      </label>

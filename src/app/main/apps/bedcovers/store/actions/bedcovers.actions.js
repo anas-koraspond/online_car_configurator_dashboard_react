@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_BEDCOVERS = '[BEDCOVERS] GET BEDCOVERS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_BEDCOVER_DIALOG = '[BEDCOVERS] OPEN EDIT BEDCOVER DIALOG'
 export const CLOSE_EDIT_BEDCOVER_DIALOG = '[BEDCOVERS] CLOSE EDIT BEDCOVER DIALOG';
 
 export function getBedCovers() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'bedcover'
    });
 
@@ -42,7 +43,7 @@ export function getBedCovers() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditBedCoverDialog() {
 export function addBedCover(newBedCover) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newBedCover
       });
 
@@ -156,7 +157,7 @@ export function addBedCover(newBedCover) {
 export function updateBedCover(bedcover) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: bedcover
       });
 
@@ -203,7 +204,7 @@ export function updateBedCover(bedcover) {
 export function removeBedCover(bedcoverId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: bedcoverId
       });
 
@@ -250,7 +251,7 @@ export function removeBedCover(bedcoverId) {
 export function removeBedCovers(bedcoverIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: bedcoverIds
       });
 

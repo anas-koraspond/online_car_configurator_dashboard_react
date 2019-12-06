@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_ADDITIONALLIGHTS = '[ADDITIONALLIGHTS] GET ADDITIONALLIGHTS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_ADDITIONALLIGHT_DIALOG = '[ADDITIONALLIGHTS] OPEN EDIT AD
 export const CLOSE_EDIT_ADDITIONALLIGHT_DIALOG = '[ADDITIONALLIGHTS] CLOSE EDIT ADDITIONALLIGHT DIALOG';
 
 export function getAdditionalLights() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'additionallight'
    });
 
@@ -42,7 +43,7 @@ export function getAdditionalLights() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditAdditionalLightDialog() {
 export function addAdditionalLight(newAdditionalLight) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newAdditionalLight
       });
 
@@ -156,7 +157,7 @@ export function addAdditionalLight(newAdditionalLight) {
 export function updateAdditionalLight(additionallight) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: additionallight
       });
 
@@ -203,7 +204,7 @@ export function updateAdditionalLight(additionallight) {
 export function removeAdditionalLight(additionallightId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: additionallightId
       });
 
@@ -250,7 +251,7 @@ export function removeAdditionalLight(additionallightId) {
 export function removeAdditionalLights(additionallightIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: additionallightIds
       });
 

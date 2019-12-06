@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_FRONTBUMPERS = '[FRONTBUMPERS] GET FRONTBUMPERS';
 export const GET_VEHICLE_TYPES = '[TIRES] GET VEHICLE TYPES';
@@ -14,7 +15,7 @@ export const OPEN_EDIT_FRONTBUMPER_DIALOG = '[FRONTBUMPERS] OPEN EDIT FRONTBUMPE
 export const CLOSE_EDIT_FRONTBUMPER_DIALOG = '[FRONTBUMPERS] CLOSE EDIT FRONTBUMPER DIALOG';
 
 export function getFrontBumpers() {
-   const request = axios.post('/admin/getPartials', {
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getPartials`, {
       type: 'frontbumper'
    });
 
@@ -42,7 +43,7 @@ export function getFrontBumpers() {
 }
 
 export function getVehicleTypes() {
-   const request = axios.post('/admin/getVehicleTypes');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getVehicleTypes`);
 
    return (dispatch) => 
       request.then((response) => {
@@ -109,7 +110,7 @@ export function closeEditFrontBumperDialog() {
 export function addFrontBumper(newFrontBumper) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addPartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addPartial`, {
          newPartial: newFrontBumper
       });
 
@@ -156,7 +157,7 @@ export function addFrontBumper(newFrontBumper) {
 export function updateFrontBumper(frontbumper) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updatePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updatePartial`, {
          partial: frontbumper
       });
 
@@ -203,7 +204,7 @@ export function updateFrontBumper(frontbumper) {
 export function removeFrontBumper(frontbumperId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartial', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartial`, {
          partialId: frontbumperId
       });
 
@@ -250,7 +251,7 @@ export function removeFrontBumper(frontbumperId) {
 export function removeFrontBumpers(frontbumperIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removePartials', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removePartials`, {
          partialIds: frontbumperIds
       });
 

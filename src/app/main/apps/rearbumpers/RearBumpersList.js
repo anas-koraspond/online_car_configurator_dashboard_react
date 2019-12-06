@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import ReactTable from "react-table";
 import * as Actions from './store/actions';
 import RearBumpersMultiSelectMenu from './RearBumpersMultiSelectMenu';
+import settingConfig from '../../../fuse-configs/settingsConfig';
 
 function RearBumpersList(props)
 {
@@ -104,7 +105,7 @@ function RearBumpersList(props)
                   ),
                   accessor : "image",
                   Cell     : row => (
-                     <img src={row.value} alt={row.original.name} className='rounded-4'></img>
+                     <img src={`${settingConfig.apiServerURL}${row.value}`} alt={row.original.name} className='rounded-4'></img>
                   ),
                   className: "justify-center",
                   width    : 61,

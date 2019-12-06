@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {showMessage} from 'app/store/actions';
 import jwtService from 'app/services/jwtService';
+import settingConfig from '../../../../../fuse-configs/settingsConfig';
 
 export const GET_WHEELS = '[WHEELS] GET WHEELS';
 export const SET_SEARCH_TEXT = '[WHEELS] SET SEARCH TEXT';
@@ -13,7 +14,7 @@ export const OPEN_EDIT_WHEEL_DIALOG = '[WHEELS] OPEN EDIT WHEEL DIALOG';
 export const CLOSE_EDIT_WHEEL_DIALOG = '[WHEELS] CLOSE EDIT WHEEL DIALOG';
 
 export function getWheels() {
-   const request = axios.post('/admin/getWheels');
+   const request = axios.post(`${settingConfig.apiServerURL}/admin/getWheels`);
 
    return (dispatch) =>
       request.then((response) => {
@@ -92,7 +93,7 @@ export function closeEditWheelDialog() {
 export function addWheel(newWheel) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/addWheel', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/addWheel`, {
          newWheel
       });
 
@@ -139,7 +140,7 @@ export function addWheel(newWheel) {
 export function updateWheel(wheel) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/updateWheel', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/updateWheel`, {
          wheel
       });
 
@@ -186,7 +187,7 @@ export function updateWheel(wheel) {
 export function removeWheel(wheelId) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removeWheel', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removeWheel`, {
          wheelId
       });
 
@@ -233,7 +234,7 @@ export function removeWheel(wheelId) {
 export function removeWheels(wheelIds) {
    return (dispatch) => {
 
-      const request = axios.post('/admin/removeWheels', {
+      const request = axios.post(`${settingConfig.apiServerURL}/admin/removeWheels`, {
          wheelIds
       });
 

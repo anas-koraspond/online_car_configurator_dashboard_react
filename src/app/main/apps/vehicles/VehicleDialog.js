@@ -12,6 +12,10 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -30,9 +34,27 @@ import settingConfig from '../../../fuse-configs/settingsConfig';
 const defaultFormState = {
    brand: '',
    type : '',
+   option_arr: [],
    image: '',
    model: ''
 };
+
+const configOptionList = [
+   'Wheel', 
+   'Tire', 
+   'Suspension', 
+   'Shock', 
+   'Front Bumper', 
+   'Rear Bumper', 
+   'Fender', 
+   'Grille', 
+   'Headlight', 
+   'Hood', 
+   'Bed Cover', 
+   'Bed Accessory', 
+   'Additional Light', 
+   'Hitch'
+];
 
 const brandList = [
    'Abarth',
@@ -230,6 +252,19 @@ function VehicleDialog(props)
       });
    }
 
+   function selectOptions(e) {
+      var value = e.target.value;
+
+      if (form.option_arr.includes(value)) {
+         setForm({ ...form, option_arr: form.option_arr.filter(option => option !== value) });
+      } else {
+         var temp = form.option_arr;
+         
+         temp.push(value);        
+         setForm({ ...form, option_arr: temp });
+      }
+   }
+
    return (
       <Dialog
          classes={{ paper: "m-24" }}
@@ -296,6 +331,26 @@ function VehicleDialog(props)
                      required
                      fullWidth
                   />
+               </div>
+
+               <div className="flex">
+                  <FormControl component="fieldset" className={classes.formControl}>
+                     <FormLabel component="legend" className="ml-5">Config Option</FormLabel>
+                     <FormGroup row={true} className="ml-40 mb-5">
+                        <Grid container>
+                           {
+                              configOptionList.map((option, index) => (
+                                 <Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={index}>
+                                    <FormControlLabel
+                                       control={<Checkbox checked={form.option_arr.includes(option) ? true : false} onChange={selectOptions} value={option} />}
+                                       label={option}
+                                    />
+                                 </Grid>
+                              ))
+                           }
+                        </Grid>
+                     </FormGroup>
+                  </FormControl>
                </div>
 
                <div className="flex justify-center">

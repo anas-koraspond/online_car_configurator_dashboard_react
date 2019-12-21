@@ -40,7 +40,7 @@ const defaultFormState = {
    model: ''
 };
 
-const sizeArrange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const sizeArrange = [1, 5, 9, 13, 17, 21, 2, 6, 10, 14, 18, 22, 3, 7, 11, 15, 19, 23, 4, 8, 12, 16, 20, 24];
 
 const useStyles = makeStyles(theme => ({
    productImageFeaturedStar: {
@@ -305,16 +305,19 @@ function SuspensionDialog(props)
                <div className="flex">
                   <FormControl component="fieldset" className={classes.formControl}>
                      <FormLabel component="legend" className="ml-5">Size</FormLabel>
-                     <FormGroup row={true} className="ml-44 mb-5">
-                        {
-                           sizeArrange.map((size, index) => (
-                              <FormControlLabel
-                                 key={index}
-                                 control={<Checkbox checked={form.size_arr.includes(size) ? true : false} onChange={changeSize} value={size} />}
-                                 label={`${size}"`}
-                              />                              
-                           ))
-                        }
+                     <FormGroup row={true} className="ml-8 mb-5">
+                        <Grid container>
+                           {
+                              sizeArrange.map((size, index) => (
+                                 <Grid item xs={2} sm={2} md={2} lg={2} xl={2} key={index}>
+                                    <FormControlLabel
+                                       control={<Checkbox checked={form.size_arr.includes(size) ? true : false} onChange={changeSize} value={size} />}
+                                       label={`${size}"`}
+                                    />
+                                 </Grid>
+                              ))
+                           }
+                        </Grid>
                      </FormGroup>
                   </FormControl>
                </div>

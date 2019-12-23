@@ -107,6 +107,23 @@ const navigationConfig = [{
       'type': 'item',
       'icon': 'event_seat',
       'url': '/hitchs'
+   }],
+},
+{
+   'type': 'divider',
+   'id'  : 'divider-2'
+},
+{
+   'id': 'settings',
+   'title': 'Settings',
+   'type': 'group',
+   'icon': 'apps',
+   'children': [{
+      'id': 'logos',
+      'title': 'Logos',
+      'type': 'item',
+      'icon': 'photo_library',
+      'url': '/logos'
    }]
 }];
 

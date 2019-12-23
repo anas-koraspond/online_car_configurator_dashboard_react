@@ -339,7 +339,7 @@ function TireDialog(props)
                                  )
                               }
                            >
-                              <img className="max-w-none w-auto h-full" src={`${settingConfig.apiServerURL}${form.image}`} alt="product"/>
+                              <img className="max-w-none w-auto" src={`${settingConfig.apiServerURL}${form.image}`} alt="product"/>
                            </div>
                         </FuseAnimate>
                      }
